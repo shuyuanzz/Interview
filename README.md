@@ -29,7 +29,7 @@ console.log(b)  // {x: 100, y: 200}
 
 1）type of 返回一个表示数据类型的字符串(主要用来检测基本类型，除了`type of null //undifined` 和 `type of Function  = Function`之外其它基本数据类型正常返回，复杂数据类型全部都为Object)  
 
-2) instance of:  （用来检测引用类型）
+2） nstance of:  （用来检测引用类型）
 如果给定的类型是引用类型 instanceof 是根据原型链去识别，如果给定的类型是基本类型，instanceof会永远返回false  
 
 3）也可以通过constructor去检测，但是constructor是有可能被覆盖和重写的，有一定的不准确性  
@@ -43,4 +43,11 @@ console.log(b)  // {x: 100, y: 200}
 Object.assign()：需注意的是目标对象只有一层的时候，是深拷贝
 Array.prototype.concat()
 Array.prototype.slice()
+```
+而深拷贝是直接开辟一个新的堆内存空间去复制整个对象的值
+深拷贝实现方式
+```
+lodash _.cloneDeep方法;
+JSON.parse(JSON.stringify());
+手写一个递归方法
 ```
