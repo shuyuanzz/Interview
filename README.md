@@ -94,7 +94,41 @@ JavaScript执行在单线程上，所有的代码都是排队执行。
 
 总体概况就是谁调用就指向谁（function调用 function this指向window），可通过 call apply bind来改变this指向。
 
-8. 
+8. EventLoop
+常见的宏任务和微任务
+宏任务：script(整体代码)、setTimeout、setInterval、I/O、事件、postMessage、 MessageChannel、setImmediate (Node.js)
+微任务：Promise.then、 MutaionObserver、process.nextTick (Node.js)
+1.执行栈所有的同步任务都在主线程执行 2.异步任务会在异步处理模块执行，执行后的回调函数放入任务队列 3. 执行栈空后，会将任务队列中的第一个任务压入执行栈中执行 4.不断重复第三步（也就是说至主线程空了就不断执行第三部）
 
+先执行同步代码，和异步代码不是回调的部分（如果遇到宏任务就将该任务压入宏任务队列） 将异步代码的回调部分放入微任务队列中，等执行栈中的所有任务执行完后，开始执行微任务队列中的代码，等微任务队列中的任务执行完后，最后执行宏任务的代码。
 
+9. async await
+其中 await 前面的代码 是同步的，调用此函数时会直接执行；而 await bar(); 这句可以被转换成 Promise.resolve(bar())；await 后面的代码 则会被放到 Promise 的 then() 方法里。因此上面的代码可以被转换成如下形式，这样是不是就很清晰了？
+function foo() {
+  // await 前面的代码
+  Promise.resolve(bar()).then(() => {
+    // await 后面的代码
+  });
+}
+
+function bar() {
+  // do something...
+}
+
+foo();
+
+10.  原型和原型链
+每一个构造函数都有一个prototype的对象，也就是原型对象，原型对象里面会自动生成一个constructor（构造函数） 它指向构造函数本身。
+```
+function Shu () {
+
+}
+let yuan = new shu ();
+```
+这样的话yuan可以通过一个叫做_proto_ 的指针来访问 Shu的原型对象，这样一次连接就形成了一条链。
+这就是原型链；
+
+11. 继承
+
+查看inherit.js
 
