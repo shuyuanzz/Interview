@@ -50,10 +50,12 @@ Yuan.prototype.constructor = Yuan;
 
 //类继承
 class a {
+    a = 1;
     constructor(age,name) {
         this.name = name;
         this.age = age;
     }
+    shu() { return 1}
 }
 class b extends a {
     constructor(age,name) {

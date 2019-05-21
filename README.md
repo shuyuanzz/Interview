@@ -2,6 +2,7 @@
 前端面试总结
 ### <a href="# js部分"></a>
 ### <a name="js部分"></a>
+### <a href="# css部分"></a>
 1. js的数据类型  
 
 js总共有六种基本数据类型————Undefined Null Boolean String Symbol(Es6新增的一种类字符串类型，来表示一种独一无二的值)，还有一种复杂数据类型Object（也可以说是引用数据类型）。  
@@ -131,4 +132,37 @@ let yuan = new shu ();
 11. 继承
 
 查看inherit.js
+
+12. Dom 事件模型和事件流
+1.Dom事件模型分为冒泡和捕获
+捕获是从window自上而下到目标节点
+冒泡是自下而上从目标节点到window
+2.阻止冒泡
+通过event.stoppPropagation()来阻止冒泡。
+3.事件委托
+将事件监听挂载在父节点上面，通过冒泡来触发事件
+优点
+节省内存、看起来更简洁。
+
+13. Bom
+与浏览器交互
+
+14. 跨域
+1.JSONP 利用同源策略对scripts标签不受限制来实现，只支持get请求
+2.CORS:通过服务端设置一个Access-Control-Allow-Origin来实现
+3.通过node中间件代理或者是nginx反向代理去实现
+
+15. localstorage,sessionStorage,cookie的区别
+cookie存储在客户端，用来与服务器交互，容量小（session cookie（没有过期时间，浏览器关闭后自动删除））
+sessionStorage，localstorage存储在客户端，容量比较大 （sessionStorage有过期时间，localstorage永久）
+
+16. 模块化
+commonjs 用在服务端（随着node.js的出现诞生），同步加载模块
+amd 依赖前置，异步加载
+cmd 依赖就近 其实也是异步加载
+es6
+
+
+### <a name="css部分"></a>
+
 
