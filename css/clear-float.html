@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>float</title>
+</head>
+<style>
+    .float {
+        float: left;
+        height: 50px;
+        width: 50px;
+        background-color: aqua;
+    }
+    .float::after {
+        display: block;
+        content: "";
+        height: 0;
+        visibility: hidden;
+        clear: both;
+    }
+    /* 或者让父级元素成为bfc */
+</style>
+
+<body>
+    <div>
+    </div>
+</body>
+
+</html>
