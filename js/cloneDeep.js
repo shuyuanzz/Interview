@@ -12,7 +12,7 @@ function clone (target) {
     }
     for(let i in target) {
         if(checkType(i) === 'Object' || checkType(i) === 'Array') {
-            result = clone(i);
+            result[i] = clone(i);
         }else {
             result[i] = target[i];
             return result;

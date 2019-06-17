@@ -4,7 +4,7 @@ function trottle(func, time) {
     return function (...args) {
         if (!timer) {
             func(...args);
-            timer = setTimeout(() => time = null, time)
+            timer = setTimeout(() => timer = null, time);
         }
     }
 }
