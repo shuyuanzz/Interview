@@ -268,3 +268,32 @@ js,css,react,redux,http,html，数据结构算法，常见情况
 ### <a name="webpack">webpack</a>
 
 ### <a name="每日面试题部分">每日面试题遗漏</a>
+#### 2019/9/4
+1. 在页面中导入样式时 link 和 import 有什么区别?
+    1. link是XHTML标签，除了可以加载css之外还可以加载RSS等其它事物，@import属于css范畴，只能加载css。
+    2. link引入css时，会在页面载入等时候同时加载，而@import会在页面完全载入后再加载。（在网速较慢等时候会出现，页面刚开始没有样式，闪烁一下后正常）
+    3. link属于XHTML标签，没有任何兼容等问题，@import css 2.1提出，不兼容低版本浏览器。
+    4. link支持使用js去改变样式，而import不支持。
+2. 这是一道大题目，把考点拆成了4个小项；需要侯选人用递归算法实现（限制15行代码以内实现；限制时间10分钟内完成）：
+a) 生成一个长度为5的空数组arr。
+b) 生成一个（2－32）之间的随机整数rand。
+c) 把随机数rand插入到数组arr内，如果数组arr内已存在与rand相同的数字，则重新生成随机数rand并插入到arr内[需要使用递归实现，不能使用for/while等循环]
+d) 最终输出一个长度为5，且内容不重复的数组arr。
+```
+let arr = new Array(5);
+
+let arr = new Array(5);
+function getArr(index) {
+    if(index === 5) {
+        return arr
+    }
+    let a = Math.floor(Math.random() * 30 + 2) 
+    if(arr.includes(a)) {
+      return  getArr(index);
+    }else {
+        arr[index] = a;
+      return getArr(index + 1)
+    }
+}
+}
+```
