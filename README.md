@@ -297,3 +297,11 @@ function getArr(index) {
 }
 }
 ```
+#### 2019/9/5
+1 写一个方法去掉字符串中的空格.
+
+```
+function removeStrEmsp(str) {
+    return str && str.replace(/\s+/g;,"");
+}
+```
