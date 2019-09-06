@@ -305,3 +305,27 @@ function removeStrEmsp(str) {
     return str && str.replace(/\s+/g;,"");
 }
 ```
+
+#### 2019/9/6
+
+1. 在页面上隐藏元素的方法有哪些?
+  1. opciacty: 0
+  2. display: none
+  3. visibility: hidden
+  4. z-index: -9999999999999
+  5. transform: scale(0)
+  6. margin-left: -100%
+  7. position: relative; left: -100%
+  8. width: 0; height: 0
+2. 如何去除字符串最后一个指定符？
+```
+function removeTheLast(str, del) {
+    if(typeof str !== 'string' || typeof del !== 'string') {
+        throw('both of params must be string!');
+    }
+    const lastIndex = str.lastIndexOf(del);
+    return str.substring(0,lastIndex) + str.substring(lastIndex+1,str.length);
+}
+```
+
+
