@@ -327,5 +327,23 @@ function removeTheLast(str, del) {
     return str.substring(0,lastIndex) + str.substring(lastIndex+1,str.length);
 }
 ```
+#### 2019/9/10
+1. 写一个方法把下划线命名转成大驼峰命名
+```
+function nameFormater(str) {
+    if(typeof str !== 'string') {
+        throw('params must be string')
+    }
+    while(str.includes('_')) {
+        const index = str.indexOf('_');
+        if(index ===  0 || index === str.length) continue
+        const prevStr = str.substring(0,index);
+        const upCase = str[index + 1].toUpperCase();
+        const nextStr = str.substring(index + 2,str.length);
+        str = prevStr+upCase+nextStr;
+    }
+    return str;
+}
 
+```
 
