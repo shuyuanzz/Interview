@@ -347,3 +347,59 @@ function nameFormater(str) {
 
 ```
 
+#### 2019/9/18
+
+1. 写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
+在不带key的情况下，对于简单列表渲染类似于`<li>1</li>`来说diff节点会更快。
+key的作用：
+1. 更准确
+因为带key就不是就地复用了，在sameNode函数 a.key === b.key对比中可以避免就地复用的情况。所以会更加准确。（react/vue 在diff过程中就可以准确的判别判别list中某一节点是新增了 删除了
+ 还是移动了）
+
+2. 更快
+利用key的唯一性生成map对象来获取对应节点，比遍历方式更快。(这个观点，就是我最初的那个观点。从这个角度看，map会比遍历更快。)  
+  
+
+
+2. ['1', '2', '3'].map(parseInt) what & why ?
+
+result: [1,NaN,Nan]
+原因 map接受一个三个参数的callback （item,index,arr）parseInt(string,radix).
+1. parseInt('1', 0) //radix为0时，且string参数不以“0x”和“0”开头时，按照10为基数处理。这个时候返回1
+2. parseInt('2', 1) //基数为1（1进制）表示的数中，最大值小于1，所以无法解析，返回NaN
+3. parseInt('3', 2) //基数为2（2进制）表示的数中，最大值小于2，所以无法解析，返回NaN
+用第三个来举例 3 不是二进制数所以返回NaN，101是二进制数.
+
+
+3. 什么是防抖和节流？有什么区别？如何实现？
+
+1. 防抖：当高频率的触发某个事件时，每隔一段时间才会执行一次，如果重新触发那就会重新计算这一段时间。
+代码实现：
+```
+
+```
+2. 节流：当高频率的触发某个事件时，在n秒内只会执行一次。 
+```
+function trottle (func,time) {
+    var timer = null;
+    return function() {
+        if(!timer) {
+            func();
+            timer = setTimeout(() => {
+                timer = null;
+            }, time);
+        }
+    }
+}
+function debounce (func,time) {
+    var timer = null;
+    return function() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this,arguments)
+        }, time);
+    }
+}
+```
+
+
