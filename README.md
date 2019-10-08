@@ -402,4 +402,13 @@ function debounce (func,time) {
 }
 ```
 
+4. 介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+[详情请见](http://es6.ruanyifeng.com/#docs/set-map）
+1. set 值不重复（可以用来做数组去重字符串去重，可以遍历）
+2. map 键值对集合 （可以遍历）  
+3. weakSet 值只能存储对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 当DOM节点删除时 存储在weakSet里面对应DOM节点也会消失 防止内存泄漏）
+4. weakMap 键只能是对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 并且给该DOM节点添加额外信息 当DOM节点删除时 存储在weakMap里面对应DOM节点也会消失 防止内存泄漏）
+
+
+
 
