@@ -347,9 +347,9 @@ function nameFormater(str) {
 
 ```
 
-#### 2019/9/18
+### 每日大厂面试题
 
-1. 写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
+#### 写 React / Vue 项目时为什么要在列表组件中写 key，其作用是什么？
 在不带key的情况下，对于简单列表渲染类似于`<li>1</li>`来说diff节点会更快。
 key的作用：
 1. 更准确
@@ -361,7 +361,7 @@ key的作用：
   
 
 
-2. ['1', '2', '3'].map(parseInt) what & why ?
+#### ['1', '2', '3'].map(parseInt) what & why ?
 
 result: [1,NaN,Nan]
 原因 map接受一个三个参数的callback （item,index,arr）parseInt(string,radix).
@@ -371,7 +371,7 @@ result: [1,NaN,Nan]
 用第三个来举例 3 不是二进制数所以返回NaN，101是二进制数.
 
 
-3. 什么是防抖和节流？有什么区别？如何实现？
+#### 什么是防抖和节流？有什么区别？如何实现？
 
 1. 防抖：当高频率的触发某个事件时，每隔一段时间才会执行一次，如果重新触发那就会重新计算这一段时间。
 代码实现：
@@ -402,14 +402,14 @@ function debounce (func,time) {
 }
 ```
 
-4. 介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
+#### 介绍下 Set、Map、WeakSet 和 WeakMap 的区别？
 [详情请见](http://es6.ruanyifeng.com/#docs/set-map）
 1. set 值不重复（可以用来做数组去重字符串去重，可以遍历）
 2. map 键值对集合 （可以遍历）  
 3. weakSet 值只能存储对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 当DOM节点删除时 存储在weakSet里面对应DOM节点也会消失 防止内存泄漏）
 4. weakMap 键只能是对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 并且给该DOM节点添加额外信息 当DOM节点删除时 存储在weakMap里面对应DOM节点也会消失 防止内存泄漏）
 
-5. 什么是深度优先遍历什么是广度优先遍历？并用它们来实现拷贝函数。
+#### 什么是深度优先遍历什么是广度优先遍历？并用它们来实现拷贝函数。
 
 ```
 深度优先：
@@ -441,7 +441,7 @@ function widthTraversal(node) {
     return nodeList;
 }
 ```
-6. ES5/ES6 的继承除了写法以外还有什么区别？
+#### ES5/ES6 的继承除了写法以外还有什么区别？
 
 https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20
 1. class声明和构造函数声明一样，都会被提升 不过class会进入暂时性死区，类似于let const 声明。 
@@ -450,5 +450,9 @@ https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20
 4. class里面对所有方法是没有prototype 和 [[constructor]]的 不能被new 调用
 5. class只能用new调用 
 6. class内部无法重写类本身
+
+
+#### setTimeout、Promise、Async/Await 的区别？
+
 
 
