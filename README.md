@@ -443,7 +443,8 @@ function widthTraversal(node) {
 ```
 #### ES5/ES6 的继承除了写法以外还有什么区别？
 
-https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20
+[详情请见](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20)
+
 1. class声明和构造函数声明一样，都会被提升 不过class会进入暂时性死区，类似于let const 声明。 
 2. class声明内部会采用严格模式
 3. class里面所有的方法都不可遍历
