@@ -455,7 +455,7 @@ function widthTraversal(node) {
 
 #### setTimeout、Promise、Async/Await 的区别？
   
-1. setTimeout 里面的回调方法会放在宏任务队列中 
-2. promise.then里面等方法会放在微任务队列中
+1. setTimeout 里面的回调方法会放在宏任务队列中 需要等带执行栈中的同步代码 和 微任务队列中的回调方法执行完以后才会执行该回调方法。
+2. promise.then里面等方法会放在微任务队列中 需等待执行栈中的同步代码执行完毕。
 3. async函数表示函数里面可能会有异步方法，await后面跟一个表达式，async方法执行时，遇到await会立即执行表达式，然后把表达式后面的代码放到微任务队列里，让出执行栈让同步代码先执行。
 
