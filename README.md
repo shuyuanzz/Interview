@@ -409,6 +409,46 @@ function debounce (func,time) {
 3. weakSet 值只能存储对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 当DOM节点删除时 存储在weakSet里面对应DOM节点也会消失 防止内存泄漏）
 4. weakMap 键只能是对象 并且对该对象是弱引用 在垃圾回收中不计入引用次数 不可遍历（常用来存储DOM节点 并且给该DOM节点添加额外信息 当DOM节点删除时 存储在weakMap里面对应DOM节点也会消失 防止内存泄漏）
 
+5. 什么是深度优先遍历什么是广度优先遍历？并用它们来实现拷贝函数。
 
+```
+深度优先：
+function deepTraversal (node , nodeList = []) {
+    if(node !== null) {
+        nodeList.push(node);
+        let children =  node.children;
+        for(let i = 0; i< children.length; i++) {
+        deepTraversal(children[i],nodeList)
+        }
+    }
+    return nodeList
+}
+广度优先：
+function widthTraversal(node) {
+    let queue = [];
+    let nodeList = [];
+    if(node) {
+        queue.push(node);
+        while(queue.length) {
+            const item  = queue.shift();
+            const children = item.children;
+            nodeList.push(item);
+            for(i = 0; i< children.length; i++) {
+                    queue.push(children[i])
+            }
+        }
+    }
+    return nodeList;
+}
+```
+6. ES5/ES6 的继承除了写法以外还有什么区别？
+
+https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/20
+1. class声明和构造函数声明一样，都会被提升 不过class会进入暂时性死区，类似于let const 声明。 
+2. class声明内部会采用严格模式
+3. class里面所有的方法都不可遍历
+4. class里面对所有方法是没有prototype 和 [[constructor]]的 不能被new 调用
+5. class只能用new调用 
+6. class内部无法重写类本身
 
 

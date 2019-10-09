@@ -1,20 +1,10 @@
-function trottle (func,time) {
-    var timer = null;
-    return function() {
-        if(!timer) {
-            func();
-            timer = setTimeout(() => {
-                timer = null;
-            }, time);
+function deepTraversal (node , nodeList = []) {
+    if(node !== null) {
+        nodeList.push(node);
+        let children =  node.children;
+        for(let i = 0; i< children.length; i++) {
+        deepTraversal(children[i],nodeList)
         }
     }
-}
-function debounce (func,time) {
-    var timer = null;
-    return function() {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            func.apply(this,arguments)
-        }, time);
-    }
+    return nodeList
 }
