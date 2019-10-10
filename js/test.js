@@ -1,10 +1,12 @@
-function deepTraversal (node , nodeList = []) {
-    if(node !== null) {
-        nodeList.push(node);
-        let children =  node.children;
-        for(let i = 0; i< children.length; i++) {
-        deepTraversal(children[i],nodeList)
-        }
+var arr = [[1, 2, 2], [3, 4, 5, 5], [6, 7, 8, 9, [11, 12, [12, 13, [14]]]], 10];
+
+function flatSortList(arr, list = []) {
+  if (arr instanceof Array) {
+    for (let i = 0; i <= arr.length; i++) {
+        flatSortList(arr[i],list)
     }
-    return nodeList
+  } else if (arr) {
+    list.push(arr);
+  }
+  return [...new Set(list.sort((a,b) => a-b))];
 }

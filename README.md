@@ -376,6 +376,15 @@ result: [1,NaN,Nan]
 1. 防抖：当高频率的触发某个事件时，每隔一段时间才会执行一次，如果重新触发那就会重新计算这一段时间。
 代码实现：
 ```
+function debounce (func,time) {
+    var timer = null;
+    return function() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            func.apply(this,arguments)
+        }, time);
+    }
+}
 
 ```
 2. 节流：当高频率的触发某个事件时，在n秒内只会执行一次。 
@@ -389,15 +398,6 @@ function trottle (func,time) {
                 timer = null;
             }, time);
         }
-    }
-}
-function debounce (func,time) {
-    var timer = null;
-    return function() {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
-            func.apply(this,arguments)
-        }, time);
     }
 }
 ```
@@ -458,4 +458,81 @@ function widthTraversal(node) {
 1. setTimeout 里面的回调方法会放在宏任务队列中 需要等带执行栈中的同步代码 和 微任务队列中的回调方法执行完以后才会执行该回调方法。
 2. promise.then里面等方法会放在微任务队列中 需等待执行栈中的同步代码执行完毕。
 3. async函数表示函数里面可能会有异步方法，await后面跟一个表达式，async方法执行时，遇到await会立即执行表达式，然后把表达式后面的代码放到微任务队列里，让出执行栈让同步代码先执行。
+
+#### 请写出下面代码的运行结果
+
+```
+async function async1() {
+    console.log('async1 start');
+    await async2();
+    console.log('async1 end');
+}
+async function async2() {
+    console.log('async2');
+}
+console.log('script start');
+setTimeout(function() {
+    console.log('setTimeout');
+}, 0)
+async1();
+new Promise(function(resolve) {
+    console.log('promise1');
+    resolve();
+}).then(function() {
+    console.log('promise2');
+});
+console.log('script end');
+```
+
+result: 
+script start => async1 start => async2 => promise1 => script end => async1 end => promise2 => setTimeout
+
+
+#### 将数组扁平化并去除其中重复数据，最终得到一个升序且不重复的数组 
+
+```
+function flatSortList(arr, list = []) {
+  if (arr instanceof Array) {
+    for (let i = 0; i <= arr.length; i++) {
+        flatSortList(arr[i],list)
+    }
+  } else if (arr) {
+    list.push(arr);
+  }
+  return [...new Set(list.sort((a,b) => a-b))];
+}
+```
+
+或者
+```
+Array.from(new Set(arr.flat(Infinity))).sort((a,b)=>{ return a-b})
+```
+
+#### （滴滴、挖财、微医、海康）JS 异步解决方案的发展历程以及优缺点
+
+1. 回调函数 
+缺点在于： 容易出现回调地狱，不能用try catch 捕获错误
+
+回调地狱的根本问题在于：
+
+1. 缺乏顺序性： 回调地狱导致的调试困难，和大脑的思维方式不符
+2. 嵌套函数存在耦合性，一旦有所改动，就会牵一发而动全身，即（控制反转）
+3. 嵌套函数过多的多话，很难处理错误
+
+2. promise 
+
+优点: promise实现了链式调用，解决的回调地狱的问题，使调理更加清晰。
+缺点: promise无法取消，只能通过回调函数来捕获错误。
+
+3. Generator
+
+特点：可以控制函数的执行，可以配合 co 函数库使用
+缺点：需要搭配co模块来执行 语意上来说不够明显 
+
+4. Async/await
+async、await 是异步的终极解决方案
+
+优点是：代码清晰，不用像 Promise 写一大堆 then 链，处理了回调地狱的问题
+
+缺点：await 将异步代码改造成同步代码，如果多个异步操作没有依赖性而使用 await 会导致性能上的降低。
 
