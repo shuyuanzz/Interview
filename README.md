@@ -510,7 +510,8 @@ Array.from(new Set(arr.flat(Infinity))).sort((a,b)=>{ return a-b})
 
 #### （滴滴、挖财、微医、海康）JS 异步解决方案的发展历程以及优缺点
 
-1. 回调函数 
+1. 回调函数   
+
 缺点在于： 容易出现回调地狱，不能用try catch 捕获错误
 
 回调地狱的根本问题在于：
