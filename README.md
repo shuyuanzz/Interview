@@ -651,3 +651,41 @@ class Example extends React.Component {
 
 #### 介绍下 npm 模块安装机制，为什么输入 npm install 就可以自动安装对应的模块？
 
+[详情请见](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/22)
+
+#### 有以下 3 个判断数组的方法，请分别介绍它们之间的区别和优劣
+1. Object.prototype.toString.call([]) 它可以检测所有的类型 
+```
+Object.prototype.toString.call([])//[Objecr,Array]
+```
+2. instanceof  的内部机制是通过判断对象的原型链中是不是能找到类型的 prototype。
+
+使用 instanceof判断一个对象是否为数组，instanceof 会判断这个对象的原型链上是否会找到对应的 Array 的原型，找到返回 true，否则返回 false。
+```
+[]  instanceof Array; // true
+```
+但 instanceof 只能用来判断对象类型，原始类型不可以。并且所有对象类型 instanceof Object 都是 true。
+
+3.  Array.isArray()
+当检测Array实例时 isArray优于 instanceof 因为它可以检测iframe
+
+Array.isArray() 与 Object.prototype.toString.call()
+
+Array.isArray()是ES5新增的方法，当不存在 Array.isArray() ，可以用 Object.prototype.toString.call() 实现。
+```
+if (!Array.isArray) {
+  Array.isArray = function(arg) {
+    return Object.prototype.toString.call(arg) === '[object Array]';
+  };
+}
+```
+
+#### 介绍下重绘和回流（Repaint & Reflow），以及如何进行优化
+[详情请见](https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/24)
+
+#### 介绍下观察者模式和订阅-发布模式的区别，各自适用于什么场景?
+观察者模式中主体和观察者是互相感知的，发布-订阅模式是借助第三方来实现调度的，发布者和订阅者之间互不感知
+
+#### 聊聊 Redux 和 Vuex 的设计思想
+
+[详情请见](https://zhuanlan.zhihu.com/p/53599723)
