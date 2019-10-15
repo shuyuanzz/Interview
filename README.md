@@ -393,7 +393,7 @@ function trottle (func,time) {
     var timer = null;
     return function() {
         if(!timer) {
-            func();
+            func.apply(this,arguments);
             timer = setTimeout(() => {
                 timer = null;
             }, time);
@@ -646,3 +646,8 @@ class Example extends React.Component {
 };
 ```
 结果：0，0，2，3
+
+下一次复习： 广度优先 => 简单讲解一下 http2 的多路复用 => 三次握手四次挥手
+
+#### 介绍下 npm 模块安装机制，为什么输入 npm install 就可以自动安装对应的模块？
+
