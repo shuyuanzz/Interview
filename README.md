@@ -827,3 +827,34 @@ var b = 10;
 })(b);
 ```
 
+#### 浏览器缓存读取规则
+[详情请见](https://www.jianshu.com/p/54cc04190252)
+
+#### 使用迭代的方式实现 flatten 函数
+
+```
+function flatten (arr) {
+    if(!arr instanceof Array) {
+        throw new Error('arguements must be array');
+    }
+    while(arr.some(item => Array.isArray(item))) {
+        arr = [].concat(...arr)
+    }
+    return arr
+}
+```
+#### 下面代码中 a 在什么情况下会打印 1？
+
+```
+var a = ?;
+if(a == 1 && a == 2 && a == 3){
+ 	console.log(1);
+}
+```
+
+#### 介绍下 BFC 及其应用
+BFC 块级格式化上下文
+[详情请见]（https://zhuanlan.zhihu.com/p/25321647）
+
+
+
