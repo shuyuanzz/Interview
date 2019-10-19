@@ -856,5 +856,61 @@ if(a == 1 && a == 2 && a == 3){
 BFC 块级格式化上下文
 [详情请见]（https://zhuanlan.zhihu.com/p/25321647）
 
+#### 下面代码输出什么
 
+```
+var a = 10;
+(function () {
+    console.log(a)
+    a = 5
+    console.log(window.a)
+    var a = 20;
+    console.log(a)
+})()
+```
 
+考察作用域和变量提升 结果： undifined => 10 => 20
+
+#### 实现一个 sleep 函数
+
+```
+function sleep(time) {
+    return new Promise(resolve => {setTimeout(resolve, time);})
+}
+async function doSomething() {
+    console.log('code begain');
+    await sleep(1000);
+    console.log('code after sleep');
+}
+```
+
+#### 使用 sort() 对数组 [3, 15, 8, 29, 102, 22] 进行排序，输出结果
+
+根据MDN上对Array.sort()的解释，默认的排序方法会将数组元素转换为字符串，然后比较字符串中字符的UTF-16编码顺序来进行排序。所以'102' 会排在 '15' 前面。
+
+#### 简述https握手的过程 以及如何验证证书的合法性
+
+[详情请看]（https://yq.aliyun.com/articles/597667?utm_content=m_51050）
+
+#### 输出以下代码执行的结果并解释为什么
+
+```
+var obj = {
+    '2': 3,
+    '3': 4,
+    'length': 2,
+    'splice': Array.prototype.splice,
+    'push': Array.prototype.push
+}
+obj.push(1)
+obj.push(2)
+console.log(obj)
+```
+push方法影响了数组的length属性和对应下标的值。
+结果 Object(4) [empty × 2, 1, 2, splice: ƒ, push: ƒ]
+2: 1
+3: 2
+length: 4
+push: ƒ push()
+splice: ƒ splice()
+__proto__: Object

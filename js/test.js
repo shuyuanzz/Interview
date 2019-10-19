@@ -1,9 +1,11 @@
-function flatten (arr) {
-    if(!arr instanceof Array) {
-        throw new Error('arguements must be array');
-    }
-    while(arr.some(item => Array.isArray(item))) {
-        arr = [].concat(...arr)
-    }
-    return arr
+
+
+
+function sleep(time) {
+    return new Promise(resolve => {setTimeout(resolve, time);})
+}
+async function doSomething() {
+    console.log('code begain');
+    await sleep(1000);
+    console.log('code after sleep');
 }
