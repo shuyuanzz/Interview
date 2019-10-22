@@ -925,3 +925,84 @@ Function.prototype.apply和Function.prototype.call 的作用是一样的，区�
 第一个参数都是，指定函数体内this的指向；
 第二个参数开始不同，apply是传入带下标的集合，数组或者类数组，apply把它传给函数作为参数，call从第二个开始传入的参数是不固定的，都会传给函数作为参数。
 call比apply的性能要好，平常可以多用call, call传入参数的格式正是内部所需要的格式，
+
+#### 为什么通常在发送数据埋点请求的时候使用的是 1x1 像素的透明 gif 图片
+
+1. 能够完成整个http请求
+2. 跨域友好
+3. 触发 GET 请求之后不需要获取和处理数据、服务器也不需要发送数据
+4. 执行过程无阻塞
+5. 相对于 XHR 性能更好
+6. 最小合法体积
+
+#### 实现 (5).add(3).minus(2) 功能
+
+```
+Number.prototype.add = function(num) {
+    return this + num
+}
+Number.prototype.minus = function(num) {
+    return this -  num
+}
+```
+
+#### Vue 的响应式原理中 Object.defineProperty 有什么缺陷
+
+1. Object.defineProperty无法监控到数组下标的变化，导致通过数组下标添加元素，不能实时响应；
+2. Object.defineProperty只能劫持对象的属性，从而需要对每个对象，每个属性进行遍历，如果，属性值是对象，还需要深度遍历。Proxy可以劫持整个对象，并返回一个新的对象。
+3. Proxy不仅可以代理对象，还可以代理数组。还可以代理动态增加的属性。
+
+#### 怎么让一个 div 水平垂直居中
+
+```
+    //给父元素添加样式
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //绝对定位不定宽高
+    body {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+div {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%)
+}
+// 绝对定位定宽高
+body {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+div {
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left：-25px;
+    margin-top: -25px;
+}
+```
+
+#### 输出以下代码的执行结果并解释为什么
+
+```
+var a = {n: 1};
+var b = a;
+a.x = a = {n: 2};
+
+console.log(a.x) 	
+console.log(b.x)
+
+// undifined
+// {n:2}
+```
+[详情请见](https://juejin.im/post/5b605473e51d45191a0d81d8)

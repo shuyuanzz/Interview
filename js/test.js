@@ -1,11 +1,6 @@
-
-
-
-function sleep(time) {
-    return new Promise(resolve => {setTimeout(resolve, time);})
+Number.prototype.add = function(num) {
+    return this + num
 }
-async function doSomething() {
-    console.log('code begain');
-    await sleep(1000);
-    console.log('code after sleep');
+Number.prototype.minus = function(num) {
+    return this -  num
 }
