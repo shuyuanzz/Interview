@@ -1006,3 +1006,135 @@ console.log(b.x)
 // {n:2}
 ```
 [详情请见](https://juejin.im/post/5b605473e51d45191a0d81d8)
+
+#### 冒泡排序如何实现，时间复杂度是多少， 还可以如何改进
+
+```
+function bubbleSort(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = 0; j < arr.length - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                const temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    console.log(arr);
+}
+
+// 改进冒泡排序
+function bubbleSort1(arr) {
+    let i = arr.length - 1;
+
+    while (i > 0) {
+        let pos = 0;
+        for (let j = 0; j < i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                pos = j;
+                const temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+        i = pos;
+    }
+    console.log(arr);
+}
+```
+
+#### 某公司 1 到 12 月份的销售额存在一个对象里面  
+如下：{1:222, 2:123, 5:888}，请把数据处理为如下结构：[222, 123, null, null, 888, null, null, null, null, null, null, null]。
+
+```
+let obj = {1:222, 2:123, 5:888};
+obj.length = 12;
+let _obj = Array.from(obj).slice(1);
+let newObj =  _obj.map((item) => {if(item === undefined) {return null;} else {return item;}});
+console.log(newObj);
+```
+
+#### 要求设计 LazyMan 类，实现以下功能
+```
+
+LazyMan('Tony');
+// Hi I am Tony
+
+LazyMan('Tony').sleep(10).eat('lunch');
+// Hi I am Tony
+// 等待了10秒...
+// I am eating lunch
+
+LazyMan('Tony').eat('lunch').sleep(10).eat('dinner');
+// Hi I am Tony
+// I am eating lunch
+// 等待了10秒...
+// I am eating diner
+
+LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(10).eat('junk food');
+// Hi I am Tony
+// 等待了5秒...
+// I am eating lunch
+// I am eating dinner
+// 等待了10秒...
+// I am eating junk food
+
+```
+
+```
+class LazyManClass {
+    constructor(name) {
+        this.taskList = [];
+        this.name = name;
+        console.log(`Hi I am ${this.name}`);
+        setTimeout(() => {
+            this.next();
+        }, 0);
+    }
+    eat (name) {
+        var that = this;
+        var fn = (function (n) {
+            return function () {
+                console.log(`I am eating ${n}`)
+                that.next();
+            }
+        })(name);
+        this.taskList.push(fn);
+        return this;
+    }
+    sleepFirst (time) {
+        var that = this;
+        var fn = (function (t) {
+            return function () {
+                setTimeout(() => {
+                    console.log(`等待了${t}秒...`)
+                    that.next();
+                }, t * 1000);  
+            }
+        })(time);
+        this.taskList.unshift(fn);
+        return this;
+    }
+    sleep (time) {
+        var that = this
+        var fn = (function (t) {
+            return function () {
+                setTimeout(() => {
+                    console.log(`等待了${t}秒...`)
+                    that.next();
+                }, t * 1000); 
+            }
+        })(time);
+        this.taskList.push(fn);
+        return this;
+    }
+    next () {
+        var fn = this.taskList.shift();
+        fn && fn();
+    }
+}
+function LazyMan(name) {
+    return new LazyManClass(name);
+}
+LazyMan('Tony').eat('lunch').eat('dinner').sleepFirst(5).sleep(4).eat('junk food')
+```
