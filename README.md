@@ -1156,3 +1156,55 @@ visibility:hidden: 修改元素只会造成本元素的重绘,性能消耗较少
 opacity: 0 ： 修改元素会造成重绘，性能消耗较少
 
 联系：它们都能让元素不可见
+
+#### 箭头函数与普通函数（function）的区别是什么？构造函数（function）可以使用 new 生成实例，那么箭头函数可以吗？为什么？
+当代码执行到箭头函数时 不会构建执行上下文 使用的是上一层的上下文 普通函数会构建新的执行上下文
+箭头函数没有内置arguements对象
+箭头函数不能作为Generator函数使用
+由于箭头函数在执行时不会预先构建执行上下文 所以其没有this 也没有 prototype 所以不能使用new 来生成实例
+
+#### 给定两个数组，写一个方法来计算它们的交集
+
+```
+function intersection(arr1, arr2) {
+  if (!arr1 instanceof Array || !arr2 instanceof Array) {
+    throw Error("arguements must be array");
+  }
+  let selectedIndex = [];
+  let res = [];
+  arr1.forEach(item => {
+    for (let i = 0; i < arr2.length; i++) {
+      if (arr2[i] === item && !selectedIndex.includes(i)) {
+        res.push(arr2[i]);
+        selectedIndex.push(i);
+        break;
+      }
+    }
+  });
+  return res;
+}
+
+```
+
+#### 已知如下代码，如何修改才能让图片宽度为 300px ？注意下面代码不可修改。
+
+```
+<img src="1.jpg" style="width:480px!important;”>
+1. max-width: 300px
+2. transform: scale(0.625,0.625)
+3.box-sizing: border-box;
+  padding: 0 90px;
+```
+
+#### 介绍下如何实现 token 加密
+jwt举例
+
+需要一个secret（随机数）
+后端利用secret和加密算法(如：HMAC-SHA256)对payload(如账号密码)生成一个字符串(token)，返回前端
+前端每次request在header中带上token
+后端用同样的算法解密
+
+#### redux 为什么要把 reducer 设计成纯函数
+为了让状态变得可预测 方便追踪错误
+state不可变是为了实现时间旅行等一些功能
+redux 三大原则 单一数据流 使用纯函数来执行修改 State是只读的
